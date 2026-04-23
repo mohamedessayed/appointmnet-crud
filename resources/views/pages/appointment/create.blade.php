@@ -16,24 +16,60 @@
   </ol>
 </nav>
 
-<form>
+
+@if ($errors->any())
+    <div class="alert alert-danger mb-3">
+
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li> {{$error}} </li>
+            @endforeach
+        </ul>
+
+    </div>
+@endif
+
+<form method="POST" action="{{ route('appointment.store') }}">
+    
+    @csrf
+
+
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">patient full name</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" name="pateint" class="form-control" id="exampleInputEmail1" value="{{ old('patient') }}">
+    @error('pateint')
+        <div class="my-2">
+
+            <span class="text-danger">{{$message}}</span>
+        </div>
+    @enderror
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">clinic</label>
-    <select class="form-select" aria-label="Default select example">
+    <select name="clinic" class="form-select" aria-label="Default select example">
         <option selected>Open this select menu</option>
-        <option value="clinic 1">clinic 1</option>
-        <option value="clinic 2">clinic 2</option>
-        <option value="clinic 3">clinic 3</option>
+        <option {{ old('clinic') === 'clinic 1' ? 'selected':null }} value="clinic 1">clinic 1</option>
+        <option {{ old('clinic') === 'clinic 2' ? 'selected':null }} value="clinic 2">clinic 2</option>
+        <option {{ old('clinic') === 'clinic 3' ? 'selected':null }} value="clinic 3">clinic 3</option>
     </select>
+
+    @error('clinic')
+        <div class="my-2">
+            <span class="text-danger">{{$message}}</span>
+        </div>
+    @enderror
   </div>
 
   <div class="mb-3">
     <label for="exampleInputPrice" class="form-label">price</label>
-    <input type="number" min='1' class="form-control" id="exampleInputPrice">
+    <input name='price' value="{{ old('price') }}" type="number" min='1' class="form-control" id="exampleInputPrice">
+
+    @error('price')
+        <div class="my-2">
+
+            <span class="text-danger">{{$message}}</span>
+        </div>
+    @enderror
   </div>
 
   

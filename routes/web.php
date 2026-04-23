@@ -11,5 +11,6 @@ Route::get('/', [SitePagesController::class,'home'])->name('home');
 Route::prefix('appointment')->group(function(){
     Route::get('/',[AppointmentController::class,'index'])->name('appointment.index');
     Route::get('/create',[AppointmentController::class,'create'])->name('appointment.create');
+    Route::post('/store',[AppointmentController::class,'store'])->name('appointment.store');
     
 });

@@ -15,7 +15,7 @@ class AppointmentController extends Controller
     {
         //
 
-        $appointments = Appointment::get();
+        $appointments = Appointment::latest()->paginate(2);
 
         return view('pages.appointment.index',compact('appointments'));
     }
@@ -36,6 +36,23 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            "pateint"=>"required|string|min:7|max:50",
+            "clinic"=>"required|string|in:clinic 1,clinic 2,clinic 3",
+            "price"=>"required|integer|min:1|max:500"
+        ]);
+
+        Appointment::create([
+
+        'pateint' => $request->pateint,
+        'clinic'=> $request->clinic,
+        'price' => $request->price,
+        ]);
+
+
+        return redirect()->route('appointment.index')->with('success', "operation complated successfully!");
+
     }
 
     /**

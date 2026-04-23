@@ -15,6 +15,13 @@
         <a href="{{ route('appointment.create') }}" class="btn btn-primary">Create new appintment</a>
     </div>
 
+    @if (session('success'))
+
+      <div class="alert alert-success mb-3">
+        {{ session('success') }}
+      </div>
+      
+    @endif
 
     @if (count($appointments)>0)
       <div>
@@ -23,32 +30,28 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
+              <th scope="col">paient name</th>
+              <th scope="col">clinic</th>
+              <th scope="col">price</th>
               <th scope="col">Handle</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
+            
+            @foreach ( $appointments as $appointment )
+              <tr>
+              <th scope="row">{{$loop->iteration}}</th>
+              <td>{{ $appointment->pateint }}</td>
+              <td>{{ $appointment->clinic }}</td>
+              <td>{{ $appointment->price }}</td>
               <td>@mdo</td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>John</td>
-              <td>Doe</td>
-              <td>@social</td>
-            </tr>
+            @endforeach
+            
           </tbody>
         </table>
+
+        {{ $appointments->links() }}
 
     </div>
 
@@ -56,8 +59,8 @@
 
 
     <div class="alert alert-warning p-5" role="alert">
-  there are no data
-</div>
+      there are no data
+    </div>
     @endif
 
 
