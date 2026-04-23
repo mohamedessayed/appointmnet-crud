@@ -69,6 +69,8 @@ class AppointmentController extends Controller
     public function edit(Appointment $appointment)
     {
         //
+
+        return view('pages.appointment.edit',compact('appointment'));
     }
 
     /**
@@ -77,6 +79,22 @@ class AppointmentController extends Controller
     public function update(Request $request, Appointment $appointment)
     {
         //
+
+        $request->validate([
+            "pateint"=>"required|string|min:7|max:50",
+            "clinic"=>"required|string|in:clinic 1,clinic 2,clinic 3",
+            "price"=>"required|integer|min:1|max:500"
+        ]);
+
+        $appointment->update([
+
+        'pateint' => $request->pateint,
+        'clinic'=> $request->clinic,
+        'price' => $request->price,
+        ]);
+
+
+        return redirect()->route('appointment.index')->with('success', "operation complated successfully!");
     }
 
     /**
@@ -85,5 +103,9 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+        $appointment->delete($appointment->id);
+
+        return redirect()->route('appointment.index')->with('success', "operation complated successfully!");
+
     }
 }

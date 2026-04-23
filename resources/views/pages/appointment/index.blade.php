@@ -44,7 +44,11 @@
               <td>{{ $appointment->pateint }}</td>
               <td>{{ $appointment->clinic }}</td>
               <td>{{ $appointment->price }}</td>
-              <td>@mdo</td>
+              <td>
+  
+               <form method="post" action="{{ route('appointment.delete', $appointment->id) }}">@csrf @method('delete') <button type="submit" class="btn btn-danger">Delete</button></from>
+                <a class="btn mx-1 btn-warning" href="{{ route('appointment.edit', $appointment->id) }}">Edit</a>
+              </td>
             </tr>
             @endforeach
             
