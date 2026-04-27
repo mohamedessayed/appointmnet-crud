@@ -46,4 +46,27 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * 
+     * 
+     * constant
+     */
+
+    const  ADMIN_CASE = 'admin';
+    const  USER_CASE = 'user';
+
+    /**
+     * Accessores functions 
+     * 
+     * 
+     */
+
+    public function isAdmin(): bool{
+        return $this->type === static::ADMIN_CASE;
+    }
+
+    public function isUser(): bool{
+        return $this->type === static::USER_CASE;
+    }
 }

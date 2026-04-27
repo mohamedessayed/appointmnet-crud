@@ -12,6 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         //
+        $middleware->redirectGuestsTo(function(){
+            return route('home');
+        });
+
+        $middleware->redirectUsersTo(function(){
+            return route('appointment.index');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

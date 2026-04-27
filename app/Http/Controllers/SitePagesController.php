@@ -14,5 +14,9 @@ class SitePagesController extends Controller
         return view('pages.home');
     }
 
+    public function signup() : View {
+        return view('auth.signup');
+    }
+
 
 }

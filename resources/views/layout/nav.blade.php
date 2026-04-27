@@ -27,10 +27,14 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      @guest
+        <a href="{{ route('home') }}" class="mx-1 btn btn-primary">Login</a>
+        <a href="{{ route('signup') }}" class="mx-1 btn btn-success">Signup</a>
+      @endguest
+
+      @auth
+        <a href="{{ route('logout') }}" class="mx-1 btn btn-danger">logout</a>
+      @endauth
     </div>
   </div>
 </nav>
