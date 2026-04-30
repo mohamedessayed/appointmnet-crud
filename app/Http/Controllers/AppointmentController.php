@@ -17,6 +17,8 @@ class AppointmentController extends Controller
     {
         //
 
+        
+
         $appointments = Appointment::latest()->paginate(2);
 
         return view('pages.appointment.index',compact('appointments'));

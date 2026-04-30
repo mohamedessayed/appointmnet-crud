@@ -3,16 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Interfaces\RoleContract;
+use App\Traits\HasRole;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements RoleContract
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRole;
 
     protected $table = 'users';
    
@@ -73,4 +76,18 @@ class User extends Authenticatable
     public function isUser(): bool{
         return $this->type === static::USER_CASE;
     }
+
+    
+
+
+    /**
+     * 
+     * ORM
+     */
+
+    public function roles() : BelongsToMany {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    
 }

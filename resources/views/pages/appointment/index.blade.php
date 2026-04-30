@@ -8,12 +8,16 @@
 
 <div class="container my-5">
 
+
+
     <h1 class="mb-3">Appointment System</h1>
 
 
+    @if(auth('web')->user()->isAllow('create'))
     <div class="mb-3">
         <a href="{{ route('appointment.create') }}" class="btn btn-primary">Create new appintment</a>
     </div>
+    @endif
 
     @if (session('success'))
 
@@ -45,9 +49,16 @@
               <td>{{ $appointment->clinic?->name ?? 'N/A' }}</td>
               <td>{{ $appointment->price }}</td>
               <td>
+    @if(auth('web')->user()->isAllow('delete'))
   
                <form method="post" action="{{ route('appointment.delete', $appointment->id) }}">@csrf @method('delete') <button type="submit" class="btn btn-danger">Delete</button></from>
+
+               @endif 
+
+               @if(auth('web')->user()->isAllow('edit'))
                 <a class="btn mx-1 btn-warning" href="{{ route('appointment.edit', $appointment->id) }}">Edit</a>
+
+                @endif
               </td>
             </tr>
             @endforeach

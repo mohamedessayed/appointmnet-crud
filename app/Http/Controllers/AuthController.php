@@ -41,12 +41,14 @@ class AuthController extends Controller
 
         ]);
 
-        User::create([
+        $newUser = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             // 'password'=>Hash::make($request->password)
             'password'=>$request->password
         ]);
+
+        $newUser->roles()->attach([1,4]);
 
 
         return redirect()->route('home')
