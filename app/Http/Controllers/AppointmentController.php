@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Clinic;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class AppointmentController extends Controller
 {
@@ -26,8 +28,8 @@ class AppointmentController extends Controller
     public function create() : View
     {
         //
-
-        return view('pages.appointment.create');
+        $clinics = Clinic::all();
+        return view('pages.appointment.create',compact('clinics'));
     }
 
     /**
@@ -39,15 +41,19 @@ class AppointmentController extends Controller
 
         $request->validate([
             "pateint"=>"required|string|min:7|max:50",
-            "clinic"=>"required|string|in:clinic 1,clinic 2,clinic 3",
+            "clinic"=>"required|string|exists:clinics,id",
             "price"=>"required|integer|min:1|max:500"
         ]);
 
-        Appointment::create([
+        $newAppointment = Appointment::create([
 
         'pateint' => $request->pateint,
-        'clinic'=> $request->clinic,
+        'clinic_id'=> $request->clinic,
         'price' => $request->price,
+        ]);
+
+        $newAppointment->prescription()->create([
+            'explain'=> Str::random(200)
         ]);
 
 
@@ -82,7 +88,7 @@ class AppointmentController extends Controller
 
         $request->validate([
             "pateint"=>"required|string|min:7|max:50",
-            "clinic"=>"required|string|in:clinic 1,clinic 2,clinic 3",
+            "clinic"=>"required|string|exists:clinics,id",
             "price"=>"required|integer|min:1|max:500"
         ]);
 

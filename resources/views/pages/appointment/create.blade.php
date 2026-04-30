@@ -48,9 +48,9 @@
     <label for="exampleInputPassword1" class="form-label">clinic</label>
     <select name="clinic" class="form-select" aria-label="Default select example">
         <option selected>Open this select menu</option>
-        <option {{ old('clinic') === 'clinic 1' ? 'selected':null }} value="clinic 1">clinic 1</option>
-        <option {{ old('clinic') === 'clinic 2' ? 'selected':null }} value="clinic 2">clinic 2</option>
-        <option {{ old('clinic') === 'clinic 3' ? 'selected':null }} value="clinic 3">clinic 3</option>
+        @foreach($clinics as $clinic)
+        <option {{old('clinic') === $clinic->id ? 'selected':''}} value="{{$clinic->id}}">{{$clinic->name}}</option>
+        @endforeach
     </select>
 
     @error('clinic')

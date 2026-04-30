@@ -42,7 +42,7 @@
               <tr>
               <th scope="row">{{$loop->iteration}}</th>
               <td>{{ $appointment->pateint }}</td>
-              <td>{{ $appointment->clinic }}</td>
+              <td>{{ $appointment->clinic?->name ?? 'N/A' }}</td>
               <td>{{ $appointment->price }}</td>
               <td>
   

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\SitePagesController;
 use App\Http\Middleware\customeMiddelWare;
 use Illuminate\Support\Facades\Route;
@@ -48,5 +49,11 @@ Route::middleware(['auth', customeMiddelWare::class])->group(function () {
 
         Route::delete('/delete/{appointment}', [AppointmentController::class, 'destroy'])
             ->name('appointment.delete');
+    });
+
+
+    Route::prefix('clinic')->group(function(){
+        Route::get('view/{clinic}',[ClinicController::class,'show'])->name('clinic.show');
+
     });
 });
