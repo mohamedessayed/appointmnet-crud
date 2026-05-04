@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements RoleContract
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasRole;
+    use HasFactory, Notifiable, HasRole, HasApiTokens;
 
     protected $table = 'users';
    
