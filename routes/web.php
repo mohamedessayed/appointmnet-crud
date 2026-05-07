@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\SitePagesController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\customeMiddelWare;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,10 @@ Route::middleware(['auth', customeMiddelWare::class])->group(function () {
 
     Route::get('logout', [AuthController::class, 'logout'])
         ->name('logout');
+
+
+    Route::get('user/settings',[UserController::class,'setting'])->name('user.setting');
+    Route::post('user/settings/change-image',[UserController::class,'change_image'])->name('user.change.image');
 
     Route::prefix('appointment')->group(function () {
         Route::get('/', [AppointmentController::class, 'index'])

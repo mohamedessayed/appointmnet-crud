@@ -33,7 +33,24 @@
       @endguest
 
       @auth
+
+      <div class="d-flex items-center">
+<ul class="list-unstyled">
+
+<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ auth('web')->user()->name }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('user.setting') }}">Settings</a></li>
+          </ul>
+        </li>
+</ul>
+
         <a href="{{ route('logout') }}" class="mx-1 btn btn-danger">logout</a>
+
+
+      </div>
       @endauth
     </div>
   </div>

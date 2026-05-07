@@ -30,6 +30,7 @@ class User extends Authenticatable implements RoleContract
         'name',
         'email',
         'password',
+        'image',
     ];
 
     /**
