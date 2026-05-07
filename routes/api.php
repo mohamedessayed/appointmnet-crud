@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AppointmentApiController;
-use App\Http\Controllers\AuthApiController;
+use App\Http\Controllers\api\AuthApiController;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

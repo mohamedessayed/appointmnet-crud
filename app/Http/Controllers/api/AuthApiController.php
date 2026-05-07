@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Services\ApiResposeService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
