@@ -14,6 +14,9 @@ Route::get('test',function(){
     return  'actived middleware';
 })->name('app');
 
+Route::livewire('/post/create', 'pages::post.create');
+
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/', [SitePagesController::class, 'home'])->name('home');
